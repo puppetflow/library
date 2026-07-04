@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+*.key
+.idea
+node_modules
+.env
