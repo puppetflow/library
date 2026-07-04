@@ -1,0 +1,12 @@
+{
+  "title": "Airtable Cross-Base Synchronization And Deduplication Toolkit",
+  "namespace": "demo_airtable",
+  "description": "Synchronize records between multiple Airtable bases, detect duplicate rows, normalize field formats, and produce a concise change report for operators before any update is applied.",
+  "category": "auth",
+  "color": "green",
+  "icon": "icon.png",
+  "author": {
+    "name": "Puppetflow Team",
+    "homepage": "https://puppetflow.com"
+  }
+}

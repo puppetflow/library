@@ -1,0 +1,12 @@
+{
+  "title": "Salesforce Account Hygiene And Field Normalization Blueprint",
+  "namespace": "demo_salesforce",
+  "description": "Normalize account records, identify inconsistent fields, detect missing values, and prepare a detailed update payload for Salesforce administrators.",
+  "category": "auth",
+  "color": "cyan",
+  "icon": "icon.png",
+  "author": {
+    "name": "Puppetflow Team",
+    "homepage": "https://puppetflow.com"
+  }
+}

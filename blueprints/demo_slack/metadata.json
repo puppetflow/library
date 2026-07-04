@@ -1,0 +1,12 @@
+{
+  "title": "Slack Incident Digest And Notification Pack",
+  "namespace": "demo_slack",
+  "description": "Create channel digests, escalate important alerts, summarize noisy conversations, and post clean updates to the right operational channels.",
+  "category": "auth",
+  "color": "orange",
+  "icon": "icon.png",
+  "author": {
+    "name": "Puppetflow Team",
+    "homepage": "https://example.com"
+  }
+}

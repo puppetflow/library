@@ -1,0 +1,12 @@
+{
+  "title": "HubSpot CRM Data Enrichment Suite",
+  "namespace": "demo_hubspot",
+  "description": "Enrich contacts and companies using public web sources, normalize lifecycle fields, and create a preview of proposed CRM updates.",
+  "category": "scraping",
+  "color": "amber",
+  "icon": "icon.png",
+  "author": {
+    "name": "Demo Studio",
+    "homepage": "https://puppetflow.com"
+  }
+}

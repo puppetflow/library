@@ -1,0 +1,16 @@
+{
+  "name": "@puppetflow/library",
+  "version": "1.0.0",
+  "description": "Puppetflow public blueprints of flows and snippets",
+  "private": true,
+  "scripts": {
+    "validate": "node scaffold.js validate",
+    "new:service": "node scaffold.js new service",
+    "new:flow": "node scaffold.js new flow",
+    "new:nodal-flow": "node scaffold.js new nodal-flow",
+    "new:snippet": "node scaffold.js new snippet"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
