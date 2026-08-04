@@ -1,3 +1,5 @@
+<a href="https://puppetflow.com"><img src="https://puppetflow.com/public/img/puppetflow-promo-banner.png" width="100%" alt="Puppetflow" /></a>
+
 # Blueprints
 
 Public blueprints collection of Puppetflow flows and snippets, consumed by the in-app store via GitHub.
