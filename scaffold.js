@@ -18,13 +18,15 @@ const c = {
 // ─── Schema ──────────────────────────────────────────────────────────────────
 
 const NAMESPACE_RE = /^[a-z_][a-z0-9_]*$/;
+const HEX_COLOR_RE = /^#[0-9a-f]{6}$/i;
 const JS_IDENT   = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/;
 const CATEGORIES = ['auth', 'scraping', 'files', 'notifications', 'data'];
-const COLORS     = ['green', 'blue', 'cyan', 'purple', 'pink', 'orange', 'amber', 'slate'];
+const COLORS     = ['green', 'blue', 'cyan', 'purple', 'pink', 'orange', 'amber', 'slate', 'white'];
 
 const s = {
   string: (opts = {}) => ({ _type: 'string', _optional: !!opts.optional }),
   namespace: (opts = {}) => ({ _type: 'namespace', _optional: !!opts.optional }),
+  color:  (opts = {}) => ({ _type: 'color', _optional: !!opts.optional }),
   enum:   (values, opts = {}) => ({ _type: 'enum', _values: values, _optional: !!opts.optional }),
   object: (props, opts = {}) => ({ _type: 'object', _props: props, _optional: !!opts.optional }),
 };
@@ -34,7 +36,7 @@ const METADATA_SCHEMA = s.object({
   namespace:   s.namespace(),
   description: s.string(),
   category:    s.enum(CATEGORIES),
-  color:       s.enum(COLORS, { optional: true }),
+  color:       s.color({ optional: true }),
   icon:        s.string(),
   author: s.object({
     name:     s.string(),
@@ -60,6 +62,9 @@ function checkSchema(value, schema, base = '') {
       if (typeof val !== 'string')   errors.push(`"${loc}" must be a string (got: ${typeof val})`);
       else if (!val.trim())          errors.push(`"${loc}" must not be empty`);
       else if (!NAMESPACE_RE.test(val)) errors.push(`"${loc}" must be a variable-style namespace (lowercase letters, digits, underscores, and must not start with a digit, e.g. "my_service") got: "${val}"`);
+    } else if (rule._type === 'color') {
+      if (typeof val !== 'string') errors.push(`"${loc}" must be a string (got: ${typeof val})`);
+      else if (!COLORS.includes(val) && !HEX_COLOR_RE.test(val)) errors.push(`"${loc}" must be one of: ${COLORS.join(', ')}, or a custom #RRGGBB hex color (got: "${val}")`);
     } else if (rule._type === 'enum') {
       if (typeof val !== 'string')        errors.push(`"${loc}" must be a string (got: ${typeof val})`);
       else if (!rule._values.includes(val)) errors.push(`"${loc}" must be one of: ${rule._values.join(', ')} (got: "${val}")`);
