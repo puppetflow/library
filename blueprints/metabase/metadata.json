@@ -1,0 +1,12 @@
+{
+  "title": "Metabase",
+  "namespace": "metabase",
+  "description": "Metabase is a powerful tool for data analysis and visualization. This blueprint allows you to login to Metabase and get the invoices for the current month and year.",
+  "category": "data",
+  "color": "blue",
+  "icon": "icon.png",
+  "author": {
+    "name": "Puppetflow Team",
+    "homepage": "https://puppetflow.com"
+  }
+}
