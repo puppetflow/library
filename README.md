@@ -14,9 +14,9 @@ blueprints/
         ├── metadata.json     # title, namespace, icon, author
         ├── icon.png          # 128×128 px
         ├── flows/
-        │   └── [reference].js
+        │   └── [reference].js or [reference].json
         └── snippets/
-            └── [reference].js
+            └── [reference].js or [reference].json
 ```
 
 - **Service**: service or domain name (`salesforce`, `gmail`, `linkedin`...)
@@ -46,12 +46,80 @@ blueprints/
 
 ## Item headers
 
+### Code flows and snippets
+
 Every `.js` file must start with `@title` and include `@description` before the code:
 
 ```js
 // @title Scrape LinkedIn profile data
 // @description Extracts public profile details from a LinkedIn page.
+// @input profileUrl [string]: "https://www.linkedin.com/in/example"
+// @input includePosts [boolean]: true
+// @input maxPosts [number]
 async function run($page, $input) { ... }
+```
+
+### Nodal flows
+
+Every Nodal `.json` flow must contain `metadata.title` and `metadata.description` before its graph:
+
+```json
+{
+  "metadata": {
+    "title": "Scrape LinkedIn profile data",
+    "description": "Extracts public profile details from a LinkedIn page."
+  },
+  "graph": {
+    "nodes": [],
+    "edges": []
+  }
+}
+```
+
+### Flow inputs
+
+Declare flow inputs in the leading comment header with:
+
+```text
+// @input name [type]: default
+```
+
+- `name` must be a valid JavaScript identifier.
+- `type` must be `string`, `number`, `boolean`, `array`, `object`, or `any`.
+- The default value is optional. An input without a default is imported with a `null` value.
+- String defaults can be plain text or JSON strings. Array and object defaults must be valid JSON.
+- Imported declarations are added automatically to the flow's **Flow Inputs**.
+- Downloads regenerate these declarations from **Flow Inputs**. `${vars.KEY}` references are resolved before export, including secret variables available to the user downloading the flow. Resolved values are written to the downloaded file in plaintext.
+
+Examples:
+
+```js
+// @input username [string]: "john@example.com"
+// @input retries [number]: 3
+// @input enabled [boolean]: true
+// @input tags [array]: ["billing", "monthly"]
+// @input options [object]: {"includeArchived": false}
+// @input password [string]
+```
+
+For a Nodal JSON flow, place the same definitions in `metadata.inputs`:
+
+```json
+{
+  "metadata": {
+    "title": "Example flow",
+    "description": "Example Nodal flow.",
+    "inputs": [
+      {"name": "username", "type": "string", "default": "john@example.com"},
+      {"name": "retries", "type": "number", "default": 3},
+      {"name": "password", "type": "string"}
+    ]
+  },
+  "graph": {
+    "nodes": [],
+    "edges": []
+  }
+}
 ```
 
 ## Commands
