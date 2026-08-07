@@ -85,9 +85,10 @@ Declare flow inputs in the leading comment header with:
 ```
 
 - `name` must be a valid JavaScript identifier.
-- `type` must be `string`, `number`, `boolean`, `array`, `object`, or `any`.
-- The default value is optional. An input without a default is imported with a `null` value.
+- `type` must be `string`, `number`, `boolean`, `array`, `object`, or `null`.
+- The default value is optional. A `string` input without a default is imported as `""`; other types use `null`.
 - String defaults can be plain text or JSON strings. Array and object defaults must be valid JSON.
+- A `null` input accepts either no default or the explicit `null` value.
 - Imported declarations are added automatically to the flow's **Flow Inputs**.
 - Downloads regenerate these declarations from **Flow Inputs**. `${vars.KEY}` references are resolved before export, including secret variables available to the user downloading the flow. Resolved values are written to the downloaded file in plaintext.
 
@@ -100,6 +101,7 @@ Examples:
 // @input tags [array]: ["billing", "monthly"]
 // @input options [object]: {"includeArchived": false}
 // @input password [string]
+// @input optionalValue [null]: null
 ```
 
 For a Nodal JSON flow, place the same definitions in `metadata.inputs`:
@@ -112,7 +114,8 @@ For a Nodal JSON flow, place the same definitions in `metadata.inputs`:
     "inputs": [
       {"name": "username", "type": "string", "default": "john@example.com"},
       {"name": "retries", "type": "number", "default": 3},
-      {"name": "password", "type": "string"}
+      {"name": "password", "type": "string"},
+      {"name": "optionalValue", "type": "null", "default": null}
     ]
   },
   "graph": {
