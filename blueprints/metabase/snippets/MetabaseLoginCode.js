@@ -6,11 +6,11 @@
 await $loginRemember({
   loginUrl: 'https://store.metabase.com',
   loginRecipe: async () => {
-      await $buttonClick('button[type=button]');
+      await $clickElement('button[type=button]');
       await $fillInput('input[name=email]', email);
-      await $buttonClick('button[type=submit]');
+      await $clickElement('button[type=submit]');
       await $fillInput('input[name=password]', password);
-      await $buttonClick('button[type=submit]');
+      await $clickElement('button[type=submit]');
   },
   loggedUrl: 'https://store.metabase.com/account/manage/billing',
   loggedMarkerCondition: async () => {

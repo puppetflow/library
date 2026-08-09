@@ -37,7 +37,7 @@ async function run($page, $input) {
   const { year, month } = $currentDateMinusOneMonth();
   await $meta({month, year});
   await $legend('Facture du ' + year + '-' + month);
-  await $buttonClick('#mantine-r5-control-invoices-' + year);
+  await $clickElement('#mantine-r5-control-invoices-' + year);
   
   const link = await findLinkByMonthAndYear($page, parseInt(month), parseInt(year));
   
@@ -47,7 +47,7 @@ async function run($page, $input) {
   
   const href = await $page.evaluate(anchor => anchor.getAttribute('href'), link);
   await $goto(href);
-  await $buttonClickAtIndex('button[type=button]', 1);
+  await $clickElementAtIndex('button[type=button]', 1);
   await $sleep(3000);
   await $waitForFile();
   
