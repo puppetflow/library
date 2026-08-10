@@ -95,6 +95,119 @@ function codeHeader(filePath) {
   return { first, tags };
 }
 
+const INPUT_TYPES = new Set([
+  'string', 'number', 'boolean', 'array', 'object', 'null',
+  'channel', 'mailbox-watcher', 'ai-model',
+]);
+const INPUT_REFERENCE_PATTERNS = {
+  channel: /^\$\{channels\.chan_[a-zA-Z0-9]{12}\}$/,
+  'mailbox-watcher': /^\$\{mailboxWatchers\.mbwa_[a-zA-Z0-9]{12}\}$/,
+  'ai-model': /^\$\{aiModels\.aim_[a-zA-Z0-9]{12}\}$/,
+};
+
+function validateCodeInputs(filePath, label, errors) {
+  const lines = fs.readFileSync(filePath, 'utf8').split('\n');
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed === '') continue;
+    if (!trimmed.startsWith('//')) break;
+    if (!/^\/\/\s*@input\b/i.test(trimmed)) continue;
+
+    const match = trimmed.match(/^\/\/\s*@input\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s+\[([a-z-]+)\](?:\s*:\s*(.*))?$/i);
+    if (!match) {
+      errors.push(`${label}: invalid @input declaration "${trimmed}"`);
+      continue;
+    }
+
+    const type = match[2].toLowerCase();
+    const defaultValue = match[3]?.trim();
+    if (!INPUT_TYPES.has(type)) {
+      errors.push(`${label}: unsupported @input type "${type}"`);
+      continue;
+    }
+
+    const referencePattern = INPUT_REFERENCE_PATTERNS[type];
+    if (referencePattern && defaultValue) {
+      let referenceValue = defaultValue;
+      try {
+        const parsed = JSON.parse(defaultValue);
+        if (typeof parsed === 'string') referenceValue = parsed;
+      } catch {
+        // Unquoted resource references are valid too.
+      }
+      if (!referencePattern.test(referenceValue)) {
+        errors.push(`${label}: ${type} input default must use the matching resource reference syntax`);
+        continue;
+      }
+    }
+    if (!defaultValue || referencePattern || type === 'string') continue;
+
+    if (type === 'number' && !/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(defaultValue)) {
+      errors.push(`${label}: number input default must be numeric`);
+    } else if (type === 'boolean' && defaultValue !== 'true' && defaultValue !== 'false') {
+      errors.push(`${label}: boolean input default must be true or false`);
+    } else if (type === 'null' && defaultValue !== 'null') {
+      errors.push(`${label}: null input default must be null`);
+    } else if (type === 'array' || type === 'object') {
+      try {
+        const parsed = JSON.parse(defaultValue);
+        if (type === 'array' ? !Array.isArray(parsed) : parsed === null || Array.isArray(parsed) || typeof parsed !== 'object') {
+          errors.push(`${label}: ${type} input default must be valid ${type} JSON`);
+        }
+      } catch {
+        errors.push(`${label}: ${type} input default must be valid JSON`);
+      }
+    }
+  }
+}
+
+function validateNodalInputs(inputs, label, errors) {
+  if (inputs === undefined) return;
+  if (!Array.isArray(inputs)) {
+    errors.push(`${label}: metadata.inputs must be an array`);
+    return;
+  }
+
+  for (const [index, input] of inputs.entries()) {
+    const inputLabel = `${label}: metadata.inputs[${index}]`;
+    if (!input || typeof input !== 'object' || Array.isArray(input)) {
+      errors.push(`${inputLabel} must be an object`);
+      continue;
+    }
+    if (typeof input.name !== 'string' || !/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(input.name)) {
+      errors.push(`${inputLabel}.name must be a valid JavaScript identifier`);
+    }
+    if (typeof input.type !== 'string' || !INPUT_TYPES.has(input.type)) {
+      errors.push(`${inputLabel}.type is unsupported`);
+      continue;
+    }
+    if (!Object.prototype.hasOwnProperty.call(input, 'default')) continue;
+
+    const value = input.default;
+    const referencePattern = INPUT_REFERENCE_PATTERNS[input.type];
+    if (referencePattern) {
+      if (typeof value !== 'string' || !referencePattern.test(value)) {
+        errors.push(`${inputLabel}.default must use the matching resource reference syntax`);
+      }
+    } else if (input.type === 'string' && typeof value !== 'string') {
+      errors.push(`${inputLabel}.default must be a string`);
+    } else if (input.type === 'number' && (typeof value !== 'number' || !Number.isFinite(value))) {
+      errors.push(`${inputLabel}.default must be a finite number`);
+    } else if (input.type === 'boolean' && typeof value !== 'boolean') {
+      errors.push(`${inputLabel}.default must be a boolean`);
+    } else if (input.type === 'null' && value !== null) {
+      errors.push(`${inputLabel}.default must be null`);
+    } else if (input.type === 'array' && !Array.isArray(value)) {
+      errors.push(`${inputLabel}.default must be an array`);
+    } else if (
+      input.type === 'object'
+      && (value === null || Array.isArray(value) || typeof value !== 'object')
+    ) {
+      errors.push(`${inputLabel}.default must be an object`);
+    }
+  }
+}
+
 function readJson(filePath, errors, label = path.basename(filePath)) {
   try {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -116,6 +229,7 @@ function jsonMetadata(value) {
   return {
     title: typeof metadata.title === 'string' ? metadata.title.trim() : '',
     description: typeof metadata.description === 'string' ? metadata.description.trim() : '',
+    inputs: metadata.inputs,
   };
 }
 
@@ -206,16 +320,19 @@ function validateService(name) {
           errors.push(`${sub}/${file}: missing non-empty JSON title in "metadata", "store", "library", or root`);
         if (!metadata.description || metadata.description.toUpperCase().startsWith('TODO'))
           errors.push(`${sub}/${file}: missing non-empty JSON description in "metadata", "store", "library", or root`);
+        validateNodalInputs(metadata.inputs, `${sub}/${file}`, errors);
         if (!jsonGraph(json))
           errors.push(`${sub}/${file}: missing nodal graph object with "nodes" and "edges" arrays`);
       } else {
-        const header = codeHeader(path.join(subDir, file));
+        const filePath = path.join(subDir, file);
+        const header = codeHeader(filePath);
         if (!header.first.startsWith('// @title '))
           errors.push(`${sub}/${file}: first non-empty line must be "// @title <title>"`);
         if (!header.tags.title || header.tags.title.toUpperCase().startsWith('TODO'))
           errors.push(`${sub}/${file}: missing non-empty "// @title <title>" header`);
         if (!header.tags.description || header.tags.description.toUpperCase().startsWith('TODO'))
           errors.push(`${sub}/${file}: missing non-empty "// @description <description>" header`);
+        validateCodeInputs(filePath, `${sub}/${file}`, errors);
       }
     }
   }

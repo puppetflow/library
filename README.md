@@ -85,7 +85,7 @@ Declare flow inputs in the leading comment header with:
 ```
 
 - `name` must be a valid JavaScript identifier.
-- `type` must be `string`, `number`, `boolean`, `array`, `object`, or `null`.
+- `type` must be `string`, `number`, `boolean`, `array`, `object`, `null`, `channel`, `mailbox-watcher`, or `ai-model`.
 - The default value is optional. A `string` input without a default is imported as `""`; other types use `null`.
 - String defaults can be plain text or JSON strings. Array and object defaults must be valid JSON.
 - A `null` input accepts either no default or the explicit `null` value.
@@ -100,6 +100,7 @@ Examples:
 // @input enabled [boolean]: true
 // @input tags [array]: ["billing", "monthly"]
 // @input options [object]: {"includeArchived": false}
+// @input model [ai-model]
 // @input password [string]
 // @input optionalValue [null]: null
 ```
