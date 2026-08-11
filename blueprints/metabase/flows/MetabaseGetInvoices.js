@@ -1,16 +1,27 @@
 // @title Metabase Get Invoices Flow
-// @description Get the invoices for the current month and year from Metabase.
+// @description Get the invoice for the previous month from Metabase.
 // @input username [string]
 // @input password [string]
-async function run($page, $input) {    
-  await $$loginMetabase($input.username, $input.password);
-  
+// @input monthLabels [array]
+async function run($page, $input) {
+  if (
+      !Array.isArray($input.monthLabels) ||
+      $input.monthLabels.length !== 12 ||
+      $input.monthLabels.some(monthLabel => typeof monthLabel !== 'string' || !monthLabel.trim())
+  ) {
+      return $generateResponseError('monthLabels must contain the 12 month labels in calendar order');
+  }
+
+  const monthMap = Object.fromEntries(
+      $input.monthLabels.map((monthLabel, index) => [
+          monthLabel.trim().toLowerCase(),
+          index + 1,
+      ])
+  );
+
+  await $$metabaseLogin($input.username, $input.password);
+
   async function findLinkByMonthAndYear(page, monthIndex, yearInt) {
-      const monthMap = {
-          january: 1, february: 2, march: 3, april: 4, may: 5, june: 6,
-          july: 7, august: 8, september: 9, october: 10, november: 11, december: 12
-      };
-      
       const rows = await page.$$('tbody > tr');
       
       for (const row of rows) {
@@ -32,26 +43,27 @@ async function run($page, $input) {
       
       return null;
   }
-  
+
   await $goto('https://store.metabase.com/account/manage/billing', { waitUntil: 'domcontentloaded' });
   const { year, month } = $currentDateMinusOneMonth();
-  await $meta({month, year});
-  await $legend('Facture du ' + year + '-' + month);
+  await $meta({ month, year });
+  await $legend('Invoice for ' + year + '-' + month);
   await $clickElement('#mantine-r5-control-invoices-' + year);
-  
+
   const link = await findLinkByMonthAndYear($page, parseInt(month), parseInt(year));
-  
+
   if (!link) {
       return $generateResponseError('No invoice link found');
   }
-  
+
   const href = await $page.evaluate(anchor => anchor.getAttribute('href'), link);
   await $goto(href);
   await $clickElementAtIndex('button[type=button]', 1);
   await $sleep(3000);
   await $waitForFile();
-  
+
   return $generateResponseSuccess('Flow completed', {
-      my_custom_data: 'hello',
+      month,
+      year,
   });
 }

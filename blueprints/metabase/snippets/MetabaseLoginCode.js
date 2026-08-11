@@ -4,13 +4,12 @@
 // @param {any} password
 
 await $loginRemember({
-  loginUrl: 'https://store.metabase.com',
+  loginUrl: 'https://store.metabase.com/login',
   loginRecipe: async () => {
-      await $clickElement('button[type=button]');
+      await $clickElement('button[type=button]', { textMatch: 'with password' });
       await $fillInput('input[name=email]', email);
-      await $clickElement('button[type=submit]');
       await $fillInput('input[name=password]', password);
-      await $clickElement('button[type=submit]');
+      await $clickElement('button[type=submit]', { textMatch: 'Log' });
   },
   loggedUrl: 'https://store.metabase.com/account/manage/billing',
   loggedMarkerCondition: async () => {
