@@ -126,6 +126,27 @@ For a Nodal JSON flow, place the same definitions in `metadata.inputs`:
 }
 ```
 
+## Referencing snippets from library items
+
+Library flows and snippets can call another snippet from the same blueprint without knowing its installed ID. Use the snippet's catalog convention:
+
+```text
+$$<namespace>_<reference>(...)
+```
+
+- `namespace` is the value from the blueprint's `metadata.json`.
+- `reference` is the snippet filename without its extension. It is case-sensitive.
+- The snippet title or label is not used as its reference.
+- Characters outside letters, digits, and underscores are converted to underscores when the convention is resolved.
+
+For example, `blueprints/metabase/snippets/MetabaseLoginCode.js` is referenced from another Metabase item with:
+
+```js
+await $$metabase_MetabaseLoginCode(username, password);
+```
+
+When imported from the library store, Puppetflow automatically installs the required snippets and replaces symbolic references with their generated IDs. Existing compatible snippets are reused. This resolution also applies to library updates, but not to standalone file imports.
+
 ## Commands
 
 ```bash

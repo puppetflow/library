@@ -19,7 +19,7 @@ async function run($page, $input) {
       ])
   );
 
-  await $$metabaseLogin($input.username, $input.password);
+  await $$metabase_MetabaseLogin($input.username, $input.password);
 
   async function findLinkByMonthAndYear(page, monthIndex, yearInt) {
       const rows = await page.$$('tbody > tr');
