@@ -2,7 +2,7 @@
 // @description Get the invoice for the previous month from Metabase.
 // @input username [string]
 // @input password [string]
-// @input monthLabels [array]
+// @input monthLabels [array]: ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
 async function run($page, $input) {
   if (
       !Array.isArray($input.monthLabels) ||
