@@ -44,7 +44,7 @@ async function run($page, $input) {
       return null;
   }
 
-  await $goto('https://store.metabase.com/account/manage/billing', { waitUntil: 'domcontentloaded' });
+  await $gotoUrl('https://store.metabase.com/account/manage/billing', 'Billing', { waitUntil: 'domcontentloaded' });
   const { year, month } = $currentDateMinusOneMonth();
   await $meta({ month, year });
   await $legend('Invoice for ' + year + '-' + month);
@@ -57,7 +57,7 @@ async function run($page, $input) {
   }
 
   const href = await $page.evaluate(anchor => anchor.getAttribute('href'), link);
-  await $goto(href);
+  await $gotoUrl(href, 'Invoice');
   await $clickElementAtIndex('button[type=button]', 1);
   await $sleep(3000);
   await $waitForFile();

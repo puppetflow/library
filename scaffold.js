@@ -15,7 +15,7 @@ const c = {
   dim:    s => `\x1b[2m${s}\x1b[0m`,
 };
 
-// ─── Schema ──────────────────────────────────────────────────────────────────
+// Schema
 
 const NAMESPACE_RE = /^[a-z_][a-z0-9_]*$/;
 const HEX_COLOR_RE = /^#[0-9a-f]{6}$/i;
@@ -76,7 +76,7 @@ function checkSchema(value, schema, base = '') {
   return errors;
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// Helpers
 
 function codeHeader(filePath) {
   const lines = fs.readFileSync(filePath, 'utf8').split('\n');
@@ -272,7 +272,7 @@ function itemFiles(dir, sub) {
     : [];
 }
 
-// ─── Validate ────────────────────────────────────────────────────────────────
+// Validate
 
 function validateService(name) {
   const dir      = path.join(BLUEPRINTS, name);
@@ -380,7 +380,7 @@ function runValidate() {
   process.exit(totalErrors > 0 ? 1 : 0);
 }
 
-// ─── Scaffold ────────────────────────────────────────────────────────────────
+// Scaffold
 
 function validNamespace(name) { return NAMESPACE_RE.test(name); }
 
@@ -441,7 +441,7 @@ function newItem(type, service, reference) {
     : '   → Replace @title and @description with real store copy'));
 }
 
-// ─── CLI ─────────────────────────────────────────────────────────────────────
+// CLI
 
 const [,, cmd, ...rest] = process.argv;
 
