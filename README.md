@@ -85,11 +85,13 @@ Declare flow inputs in the leading comment header with:
 ```
 
 - `name` must be a valid JavaScript identifier.
-- `type` must be `string`, `number`, `boolean`, `array`, `object`, `null`, `channel`, `mailbox-watcher`, or `ai-model`.
+- `type` must be `string`, `number`, `boolean`, `array`, `object`, `null`, `channel`, `mailbox-watcher`, `ai-model`, or `datatable`.
 - The default value is optional. A `string` input without a default is imported as `""`; other types use `null`.
 - String defaults can be plain text or JSON strings. Array and object defaults must be valid JSON.
 - A `null` input accepts either no default or the explicit `null` value.
+- Resource inputs use stable references. Data Tables use `${dataTables.<tableId>}` and keep the table ID when the table is renamed.
 - Imported declarations are added automatically to the flow's **Flow Inputs**.
+- In form mode, resource types use searchable selectors that display resource names. In JSON mode, namespace and ID autocomplete inserts the same stable references.
 - Downloads regenerate these declarations from **Flow Inputs**. `${vars.KEY}` references are resolved before export, including secret variables available to the user downloading the flow. Resolved values are written to the downloaded file in plaintext.
 
 Examples:
@@ -101,6 +103,7 @@ Examples:
 // @input tags [array]: ["billing", "monthly"]
 // @input options [object]: {"includeArchived": false}
 // @input model [ai-model]
+// @input table [datatable]
 // @input password [string]
 // @input optionalValue [null]: null
 ```
@@ -115,6 +118,7 @@ For a Nodal JSON flow, place the same definitions in `metadata.inputs`:
     "inputs": [
       {"name": "username", "type": "string", "default": "john@example.com"},
       {"name": "retries", "type": "number", "default": 3},
+      {"name": "table", "type": "datatable"},
       {"name": "password", "type": "string"},
       {"name": "optionalValue", "type": "null", "default": null}
     ]
