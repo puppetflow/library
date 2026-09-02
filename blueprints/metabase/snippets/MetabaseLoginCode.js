@@ -1,5 +1,5 @@
 // @title Metabase Login Code
-// @description Automatically logs into the Metabase platform to retrieve invoices, for example.
+// @description Login into Metabase billing portal
 // @param {any} username
 // @param {any} password
 
