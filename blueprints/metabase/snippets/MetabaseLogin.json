@@ -97,7 +97,7 @@
           },
           "inputValue": {
             "mode": "expression",
-            "value": "{{ $input.username }}"
+            "value": "{{ $run.$input.username }}"
           }
         }
       },
@@ -114,7 +114,7 @@
           },
           "inputValue": {
             "mode": "expression",
-            "value": "{{ $input.password }}"
+            "value": "{{ $run.$input.password }}"
           }
         }
       },
