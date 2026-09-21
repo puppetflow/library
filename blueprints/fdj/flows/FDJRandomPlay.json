@@ -1,0 +1,468 @@
+{
+  "metadata": {
+    "title": "FDJ Random Play",
+    "inputs": [
+      {
+        "name": "username",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "name": "birthdate",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "__system_run",
+        "name": "RUN",
+        "x": 0,
+        "y": -96,
+        "values": {},
+        "system": "run"
+      },
+      {
+        "id": "__system_terminate",
+        "name": "TERMINATE",
+        "x": 0,
+        "y": 168,
+        "values": {},
+        "system": "terminate"
+      },
+      {
+        "id": "Loop-1790015565376-4",
+        "name": "Loop",
+        "label": "Loop",
+        "x": 768,
+        "y": -96,
+        "values": {
+          "mode": {
+            "mode": "fixed",
+            "value": "items"
+          },
+          "items": {
+            "mode": "expression",
+            "value": "{{ $run.result.numbers }}"
+          },
+          "iterations": {
+            "mode": "fixed",
+            "value": "3"
+          },
+          "condition": {
+            "mode": "expression",
+            "value": "{{ false }}"
+          },
+          "maxIterations": {
+            "mode": "fixed",
+            "value": "100"
+          }
+        }
+      },
+      {
+        "id": "$clickElementAtIndex-1790016545479-6",
+        "name": "$clickElementAtIndex",
+        "label": "Click Element At Index",
+        "x": 960,
+        "y": -204,
+        "values": {
+          "elementsSelector": {
+            "mode": "expression",
+            "value": "#pdj-primary-selections .peer"
+          },
+          "elementIndex": {
+            "mode": "expression",
+            "value": "{{ $run.$loop.item - 1 }}"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790016576029-7",
+        "name": "$sleep",
+        "label": "Sleep",
+        "x": 1152,
+        "y": -204,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "1000"
+          }
+        }
+      },
+      {
+        "id": "$clickElementAtIndex-1790016545479-6-paste-1790017777235",
+        "name": "$clickElementAtIndex",
+        "label": "Click Element At Index-1",
+        "x": 960,
+        "y": 12,
+        "values": {
+          "elementsSelector": {
+            "mode": "expression",
+            "value": "#pdj-secondary-selections .peer"
+          },
+          "elementIndex": {
+            "mode": "expression",
+            "value": "{{ $run.result.lucky - 1 }}"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790017805913-9",
+        "name": "$sleep",
+        "label": "Sleep-1",
+        "x": 1152,
+        "y": 12,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "1000"
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1790017842367-10",
+        "name": "$clickElement",
+        "label": "Click Element",
+        "x": 1344,
+        "y": 12,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#pdj-play-button"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790017918273-11",
+        "name": "$sleep",
+        "label": "Sleep-2",
+        "x": 1536,
+        "y": 12,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "3000"
+          }
+        }
+      },
+      {
+        "id": "$selectElement-1790017929426-12",
+        "name": "$selectElement",
+        "label": "Select Element",
+        "x": 1728,
+        "y": 12,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "[role=dialog]"
+          },
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-timeout",
+                "key": "timeout",
+                "valueType": "number",
+                "value": {
+                  "mode": "fixed",
+                  "value": "2000"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "If / Else-1790017939918-13",
+        "name": "If / Else",
+        "label": "If / Else",
+        "x": 1920,
+        "y": 12,
+        "values": {
+          "condition": {
+            "mode": "if-condition",
+            "combinator": "and",
+            "rules": [
+              {
+                "id": "condition-1",
+                "category": "object",
+                "operator": "exists",
+                "left": {
+                  "mode": "expression",
+                  "value": "{{ $run.$result }}"
+                },
+                "right": {
+                  "mode": "fixed",
+                  "value": ""
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1790017965531-14",
+        "name": "$clickElement",
+        "label": "Click Element-1",
+        "x": 2112,
+        "y": -96,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "[role=dialog] button.absolute"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790017992865-15",
+        "name": "$sleep",
+        "label": "Sleep-3",
+        "x": 2304,
+        "y": -96,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "1000"
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1790017997113-16",
+        "name": "$clickElement",
+        "deactivated": true,
+        "label": "Click Element-2",
+        "x": 2496,
+        "y": 24,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#validate-button"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790018003460-17",
+        "name": "$sleep",
+        "deactivated": true,
+        "label": "Sleep-4",
+        "x": 2688,
+        "y": 24,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "10000"
+          }
+        }
+      },
+      {
+        "id": "$$snip_bZ2bA1Liwsxl-1790018015461-18",
+        "name": "$$snip_bZ2bA1Liwsxl",
+        "label": "FDJ Login",
+        "x": 192,
+        "y": -96,
+        "values": {
+          "username": {
+            "mode": "expression",
+            "value": "{{ $run.$input.username }}"
+          },
+          "password": {
+            "mode": "expression",
+            "value": "{{ $run.$input.password }}"
+          },
+          "birthdate": {
+            "mode": "expression",
+            "value": "{{ $run.$input.birthdate }}"
+          },
+          "channelId": {
+            "mode": "expression",
+            "value": "{{ $run.$input.channelId }}"
+          }
+        },
+        "callArguments": [
+          "username",
+          "password",
+          "birthdate",
+          "channelId"
+        ]
+      },
+      {
+        "id": "$gotoUrl-1790018142970-19",
+        "name": "$gotoUrl",
+        "label": "Goto Url",
+        "x": 576,
+        "y": -96,
+        "values": {
+          "tabName": {
+            "mode": "fixed",
+            "value": "Default"
+          },
+          "url": {
+            "mode": "fixed",
+            "value": "https://www.fdj.fr/jeux-de-tirage/loto?board=0"
+          }
+        }
+      },
+      {
+        "id": "Code-1790020469415-18-paste-1790021029698",
+        "name": "Code",
+        "label": "Code",
+        "x": 384,
+        "y": -96,
+        "values": {
+          "code": {
+            "mode": "fixed",
+            "value": "const numbers = [];\n\nwhile (numbers.length < 5) {\n  const number = Math.floor(Math.random() * 49) + 1;\n\n  if (!numbers.includes(number)) {\n    numbers.push(number);\n  }\n}\n\nnumbers.sort((a, b) => a - b);\n\nconst lucky = Math.floor(Math.random() * 10) + 1;\n\nconst result = {\n  numbers,\n  lucky\n};\n\n$run.result = result;"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "Loop-1790015565376-4:loop->$clickElementAtIndex-1790016545479-6:input",
+        "sourceNodeId": "Loop-1790015565376-4",
+        "targetNodeId": "$clickElementAtIndex-1790016545479-6",
+        "sourcePort": "loop",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElementAtIndex-1790016545479-6:output->$sleep-1790016576029-7:input",
+        "sourceNodeId": "$clickElementAtIndex-1790016545479-6",
+        "targetNodeId": "$sleep-1790016576029-7",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "Loop-1790015565376-4:done->$clickElementAtIndex-1790016545479-6-paste-1790017777235:input",
+        "sourceNodeId": "Loop-1790015565376-4",
+        "targetNodeId": "$clickElementAtIndex-1790016545479-6-paste-1790017777235",
+        "sourcePort": "done",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElementAtIndex-1790016545479-6-paste-1790017777235:output->$sleep-1790017805913-9:input",
+        "sourceNodeId": "$clickElementAtIndex-1790016545479-6-paste-1790017777235",
+        "targetNodeId": "$sleep-1790017805913-9",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sleep-1790017805913-9:output->$clickElement-1790017842367-10:input",
+        "sourceNodeId": "$sleep-1790017805913-9",
+        "targetNodeId": "$clickElement-1790017842367-10",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElement-1790017842367-10:output->$sleep-1790017918273-11:input",
+        "sourceNodeId": "$clickElement-1790017842367-10",
+        "targetNodeId": "$sleep-1790017918273-11",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sleep-1790017918273-11:output->$selectElement-1790017929426-12:input",
+        "sourceNodeId": "$sleep-1790017918273-11",
+        "targetNodeId": "$selectElement-1790017929426-12",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$selectElement-1790017929426-12:output->If / Else-1790017939918-13:input",
+        "sourceNodeId": "$selectElement-1790017929426-12",
+        "targetNodeId": "If / Else-1790017939918-13",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "If / Else-1790017939918-13:true->$clickElement-1790017965531-14:input",
+        "sourceNodeId": "If / Else-1790017939918-13",
+        "targetNodeId": "$clickElement-1790017965531-14",
+        "sourcePort": "true",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElement-1790017965531-14:output->$sleep-1790017992865-15:input",
+        "sourceNodeId": "$clickElement-1790017965531-14",
+        "targetNodeId": "$sleep-1790017992865-15",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sleep-1790017992865-15:output->$clickElement-1790017997113-16:input",
+        "sourceNodeId": "$sleep-1790017992865-15",
+        "targetNodeId": "$clickElement-1790017997113-16",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "If / Else-1790017939918-13:false->$clickElement-1790017997113-16:input",
+        "sourceNodeId": "If / Else-1790017939918-13",
+        "targetNodeId": "$clickElement-1790017997113-16",
+        "sourcePort": "false",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElement-1790017997113-16:output->$sleep-1790018003460-17:input",
+        "sourceNodeId": "$clickElement-1790017997113-16",
+        "targetNodeId": "$sleep-1790018003460-17",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$gotoUrl-1790018142970-19:output->Loop-1790015565376-4:input",
+        "sourceNodeId": "$gotoUrl-1790018142970-19",
+        "targetNodeId": "Loop-1790015565376-4",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "Code-1790020469415-18-paste-1790021029698:output->$gotoUrl-1790018142970-19:input",
+        "sourceNodeId": "Code-1790020469415-18-paste-1790021029698",
+        "targetNodeId": "$gotoUrl-1790018142970-19",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$$snip_bZ2bA1Liwsxl-1790018015461-18:output->Code-1790020469415-18-paste-1790021029698:input",
+        "sourceNodeId": "$$snip_bZ2bA1Liwsxl-1790018015461-18",
+        "targetNodeId": "Code-1790020469415-18-paste-1790021029698",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "__system_run:output->$$snip_bZ2bA1Liwsxl-1790018015461-18:input",
+        "sourceNodeId": "__system_run",
+        "targetNodeId": "$$snip_bZ2bA1Liwsxl-1790018015461-18",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      }
+    ]
+  }
+}

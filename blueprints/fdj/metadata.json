@@ -1,0 +1,12 @@
+{
+  "title": "FDJ",
+  "namespace": "fdj",
+  "description": "FDJ is a french lottery company. This blueprint allows you to login to FDJ and play a random game of LOTTO.",
+  "category": "fun",
+  "color": "blue",
+  "icon": "icon.png",
+  "author": {
+    "name": "Puppetflow Team",
+    "homepage": "https://puppetflow.com"
+  }
+}

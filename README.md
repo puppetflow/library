@@ -42,7 +42,7 @@ blueprints/
 }
 ```
 
-`author` and `color` are optional. `title`, `namespace`, `description`, `category`, and `icon` are required. `namespace` must match `^[a-z_][a-z0-9_]*$`. `category` must be one of: `auth`, `scraping`, `files`, `notifications`, `data`. `color` can be one of `green`, `blue`, `cyan`, `purple`, `pink`, `orange`, `amber`, `slate`, `white`, or a custom six-digit hex color such as `#ff4d8d`.
+`author` and `color` are optional. `title`, `namespace`, `description`, `category`, and `icon` are required. `namespace` must match `^[a-z_][a-z0-9_]*$`. `category` must be one of: `auth`, `scraping`, `files`, `notifications`, `data`, `fun`, `form`. `color` can be one of `green`, `blue`, `cyan`, `purple`, `pink`, `orange`, `amber`, `slate`, `white`, or a custom six-digit hex color such as `#ff4d8d`.
 
 ## Item headers
 

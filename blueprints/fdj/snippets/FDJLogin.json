@@ -1,0 +1,446 @@
+{
+  "format": "puppetflow.snippet",
+  "format_version": 1,
+  "snippet_type": "nodal",
+  "compiler_version": 2,
+  "metadata": {
+    "title": "FDJ Login",
+    "description": "Login to FDJ.fr",
+    "args": "username, password, birthdate, channelId"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "__system_function",
+        "name": "FUNCTION",
+        "x": 0,
+        "y": -120,
+        "values": {},
+        "system": "function"
+      },
+      {
+        "id": "$loginRemember-1789681427035-2-paste-1789681782302-paste-1789989279987",
+        "name": "$loginRemember",
+        "label": "Login Remember",
+        "x": 660,
+        "y": 156,
+        "values": {
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-loginUrl",
+                "key": "loginUrl",
+                "valueType": "string",
+                "value": {
+                  "mode": "fixed",
+                  "value": "https://www.fdj.fr/"
+                }
+              },
+              {
+                "id": "known-loggedUrl",
+                "key": "loggedUrl",
+                "valueType": "string",
+                "value": {
+                  "mode": "fixed",
+                  "value": "https://www.fdj.fr/"
+                }
+              },
+              {
+                "id": "known-loggedMarkerCondition",
+                "key": "loggedMarkerCondition",
+                "valueType": "object",
+                "value": {
+                  "mode": "object",
+                  "inputMode": "form",
+                  "jsonMode": "fixed",
+                  "value": "{}",
+                  "fields": [
+                    {
+                      "id": "known-selector",
+                      "key": "selector",
+                      "valueType": "string",
+                      "value": {
+                        "mode": "fixed",
+                        "value": "header button"
+                      }
+                    },
+                    {
+                      "id": "known-textMatch",
+                      "key": "textMatch",
+                      "valueType": "string",
+                      "value": {
+                        "mode": "fixed",
+                        "value": "Créer un compte"
+                      }
+                    },
+                    {
+                      "id": "known-operator",
+                      "key": "operator",
+                      "valueType": "string",
+                      "value": {
+                        "mode": "fixed",
+                        "value": "doesNotExist"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1789681496068-3-paste-1789681782302-paste-1789989279987",
+        "name": "$clickElement",
+        "label": "Click Element",
+        "x": 852,
+        "y": 300,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#top-menu-signin-button"
+          },
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-timeout",
+                "key": "timeout",
+                "valueType": "number",
+                "value": {
+                  "mode": "fixed",
+                  "value": "30000"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$fillInput-1789681562078-4-paste-1789681782302-paste-1789989279987",
+        "name": "$fillInput",
+        "label": "Fill Input",
+        "x": 852,
+        "y": 432,
+        "values": {
+          "inputSelectorOrHandle": {
+            "mode": "fixed",
+            "value": "[name=email]"
+          },
+          "inputValue": {
+            "mode": "expression",
+            "value": "{{ $run.$input.username }}"
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1789681573352-5-paste-1789681782302-paste-1789989279987",
+        "name": "$clickElement",
+        "label": "Click Element-1",
+        "x": 852,
+        "y": 564,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#wsi-login-credentials-form-memorize-email"
+          }
+        }
+      },
+      {
+        "id": "$fillInput-1789681578801-6-paste-1789681782302-paste-1789989279987",
+        "name": "$fillInput",
+        "label": "Fill Input-1",
+        "x": 852,
+        "y": 852,
+        "values": {
+          "inputSelectorOrHandle": {
+            "mode": "fixed",
+            "value": "[name=bday]"
+          },
+          "inputValue": {
+            "mode": "expression",
+            "value": "{{ $run.$input.birthdate }}"
+          }
+        }
+      },
+      {
+        "id": "$fillInput-1789681656085-7-paste-1789681782302-paste-1789989279987",
+        "name": "$fillInput",
+        "label": "Fill Input-2",
+        "x": 852,
+        "y": 708,
+        "values": {
+          "inputSelectorOrHandle": {
+            "mode": "fixed",
+            "value": "[name=current-password]"
+          },
+          "inputValue": {
+            "mode": "expression",
+            "value": "{{ $run.$input.password }}"
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1789681707905-8-paste-1789681782302-paste-1789989279987",
+        "name": "$clickElement",
+        "label": "Click Element-2",
+        "x": 852,
+        "y": 984,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#wsi-authenticate-button"
+          }
+        }
+      },
+      {
+        "id": "$gotoUrl-1789687618812-11-paste-1789989279987",
+        "name": "$gotoUrl",
+        "label": "Goto Url",
+        "x": 204,
+        "y": -120,
+        "values": {
+          "tabName": {
+            "mode": "fixed",
+            "value": "Default"
+          },
+          "url": {
+            "mode": "fixed",
+            "value": "https://www.fdj.fr/"
+          }
+        }
+      },
+      {
+        "id": "If / Else-1789687625898-12-paste-1789989279987",
+        "name": "If / Else",
+        "label": "If / Else",
+        "x": 204,
+        "y": 144,
+        "values": {
+          "condition": {
+            "mode": "if-condition",
+            "combinator": "and",
+            "rules": [
+              {
+                "id": "condition-1",
+                "category": "object",
+                "operator": "exists",
+                "left": {
+                  "mode": "expression",
+                  "value": "{{ $run.$result }}"
+                },
+                "right": {
+                  "mode": "fixed",
+                  "value": ""
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$selectElement-1789687640394-13-paste-1789989279987",
+        "name": "$selectElement",
+        "label": "Select Element",
+        "x": 204,
+        "y": 12,
+        "values": {
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-timeout",
+                "key": "timeout",
+                "valueType": "number",
+                "value": {
+                  "mode": "fixed",
+                  "value": "5000"
+                }
+              }
+            ]
+          },
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "iframe[src*=\"captcha-delivery\"]"
+          }
+        }
+      },
+      {
+        "id": "$waitHumanValidation-1789681859731-10-paste-1789687728818-paste-1789989279987",
+        "name": "$waitHumanValidation",
+        "label": "Wait Human Validation",
+        "x": 432,
+        "y": 48,
+        "values": {
+          "channelId": {
+            "mode": "expression",
+            "value": "{{ $run.$input.channelId }}"
+          }
+        }
+      },
+      {
+        "id": "$gotoUrl-1789687618812-11-paste-1789989010635-paste-1789989279987",
+        "name": "$gotoUrl",
+        "label": "Goto Url-2",
+        "x": 852,
+        "y": 1128,
+        "values": {
+          "tabName": {
+            "mode": "fixed",
+            "value": "Default"
+          },
+          "url": {
+            "mode": "fixed",
+            "value": "https://www.fdj.fr/"
+          }
+        }
+      },
+      {
+        "id": "__sticky_note-1789989101757-14-paste-1789989279987",
+        "name": "__sticky_note",
+        "kind": "stickyNote",
+        "label": "Sticky note",
+        "x": 276,
+        "y": 0,
+        "values": {},
+        "stickyNote": {
+          "content": "### DataDome detection",
+          "color": "yellow",
+          "width": 360.2871534907598,
+          "height": 473.4179286447639
+        }
+      },
+      {
+        "id": "__sticky_note-1789989193575-17-paste-1789989279987",
+        "name": "__sticky_note",
+        "kind": "stickyNote",
+        "label": "Sticky note",
+        "x": 852,
+        "y": 672,
+        "values": {},
+        "stickyNote": {
+          "content": "### Login",
+          "color": "yellow",
+          "width": 217.60876540041045,
+          "height": 1020.9331496668901
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "$clickElement-1789681496068-3-paste-1789681782302-paste-1789989279987:output->$fillInput-1789681562078-4-paste-1789681782302-paste-1789989279987:input",
+        "sourceNodeId": "$clickElement-1789681496068-3-paste-1789681782302-paste-1789989279987",
+        "targetNodeId": "$fillInput-1789681562078-4-paste-1789681782302-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$fillInput-1789681562078-4-paste-1789681782302-paste-1789989279987:output->$clickElement-1789681573352-5-paste-1789681782302-paste-1789989279987:input",
+        "sourceNodeId": "$fillInput-1789681562078-4-paste-1789681782302-paste-1789989279987",
+        "targetNodeId": "$clickElement-1789681573352-5-paste-1789681782302-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElement-1789681573352-5-paste-1789681782302-paste-1789989279987:output->$fillInput-1789681656085-7-paste-1789681782302-paste-1789989279987:input",
+        "sourceNodeId": "$clickElement-1789681573352-5-paste-1789681782302-paste-1789989279987",
+        "targetNodeId": "$fillInput-1789681656085-7-paste-1789681782302-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$fillInput-1789681656085-7-paste-1789681782302-paste-1789989279987:output->$fillInput-1789681578801-6-paste-1789681782302-paste-1789989279987:input",
+        "sourceNodeId": "$fillInput-1789681656085-7-paste-1789681782302-paste-1789989279987",
+        "targetNodeId": "$fillInput-1789681578801-6-paste-1789681782302-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$fillInput-1789681578801-6-paste-1789681782302-paste-1789989279987:output->$clickElement-1789681707905-8-paste-1789681782302-paste-1789989279987:input",
+        "sourceNodeId": "$fillInput-1789681578801-6-paste-1789681782302-paste-1789989279987",
+        "targetNodeId": "$clickElement-1789681707905-8-paste-1789681782302-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$loginRemember-1789681427035-2-paste-1789681782302-paste-1789989279987:flow-options-loginRecipe->$clickElement-1789681496068-3-paste-1789681782302-paste-1789989279987:input",
+        "sourceNodeId": "$loginRemember-1789681427035-2-paste-1789681782302-paste-1789989279987",
+        "targetNodeId": "$clickElement-1789681496068-3-paste-1789681782302-paste-1789989279987",
+        "sourcePort": "flow-options-loginRecipe",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "If / Else-1789687625898-12-paste-1789989279987:true->$waitHumanValidation-1789681859731-10-paste-1789687728818-paste-1789989279987:input",
+        "sourceNodeId": "If / Else-1789687625898-12-paste-1789989279987",
+        "targetNodeId": "$waitHumanValidation-1789681859731-10-paste-1789687728818-paste-1789989279987",
+        "sourcePort": "true",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$waitHumanValidation-1789681859731-10-paste-1789687728818-paste-1789989279987:output->$loginRemember-1789681427035-2-paste-1789681782302-paste-1789989279987:input",
+        "sourceNodeId": "$waitHumanValidation-1789681859731-10-paste-1789687728818-paste-1789989279987",
+        "targetNodeId": "$loginRemember-1789681427035-2-paste-1789681782302-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "If / Else-1789687625898-12-paste-1789989279987:false->$loginRemember-1789681427035-2-paste-1789681782302-paste-1789989279987:input",
+        "sourceNodeId": "If / Else-1789687625898-12-paste-1789989279987",
+        "targetNodeId": "$loginRemember-1789681427035-2-paste-1789681782302-paste-1789989279987",
+        "sourcePort": "false",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$selectElement-1789687640394-13-paste-1789989279987:output->If / Else-1789687625898-12-paste-1789989279987:input",
+        "sourceNodeId": "$selectElement-1789687640394-13-paste-1789989279987",
+        "targetNodeId": "If / Else-1789687625898-12-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$gotoUrl-1789687618812-11-paste-1789989279987:output->$selectElement-1789687640394-13-paste-1789989279987:input",
+        "sourceNodeId": "$gotoUrl-1789687618812-11-paste-1789989279987",
+        "targetNodeId": "$selectElement-1789687640394-13-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElement-1789681707905-8-paste-1789681782302-paste-1789989279987:output->$gotoUrl-1789687618812-11-paste-1789989010635-paste-1789989279987:input",
+        "sourceNodeId": "$clickElement-1789681707905-8-paste-1789681782302-paste-1789989279987",
+        "targetNodeId": "$gotoUrl-1789687618812-11-paste-1789989010635-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "__system_function:output->$gotoUrl-1789687618812-11-paste-1789989279987:input",
+        "sourceNodeId": "__system_function",
+        "targetNodeId": "$gotoUrl-1789687618812-11-paste-1789989279987",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      }
+    ]
+  }
+}
