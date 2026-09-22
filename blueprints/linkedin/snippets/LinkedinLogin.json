@@ -1,0 +1,315 @@
+{
+  "format": "puppetflow.snippet",
+  "format_version": 1,
+  "snippet_type": "nodal",
+  "compiler_version": 2,
+  "metadata": {
+    "title": "Linkedin Login",
+    "description": "Login to Linkedin",
+    "args": "email, password, totp"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "__system_function",
+        "name": "FUNCTION",
+        "x": 0,
+        "y": -120,
+        "values": {},
+        "system": "function"
+      },
+      {
+        "id": "$loginRemember-1788004526420-5-paste-1790035752707-paste-1790081802674",
+        "name": "$loginRemember",
+        "label": "Login Remember",
+        "x": 144,
+        "y": -120,
+        "values": {
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-loginUrl",
+                "key": "loginUrl",
+                "valueType": "string",
+                "value": {
+                  "mode": "fixed",
+                  "value": "https://linkedin.com/login"
+                }
+              },
+              {
+                "id": "known-loggedUrl",
+                "key": "loggedUrl",
+                "valueType": "string",
+                "value": {
+                  "mode": "fixed",
+                  "value": "https://linkedin.com/login"
+                }
+              },
+              {
+                "id": "known-loggedMarkerCondition",
+                "key": "loggedMarkerCondition",
+                "valueType": "object",
+                "value": {
+                  "mode": "object",
+                  "inputMode": "form",
+                  "jsonMode": "fixed",
+                  "value": "{}",
+                  "fields": [
+                    {
+                      "id": "known-selector",
+                      "key": "selector",
+                      "valueType": "string",
+                      "value": {
+                        "mode": "fixed",
+                        "value": "[componentKey=SearchResults_SearchTyahInputRef]"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$fillInput-1790035562626-5-paste-1790035752707-paste-1790081802674",
+        "name": "$fillInput",
+        "label": "Fill Input",
+        "x": 336,
+        "y": -108,
+        "values": {
+          "inputSelectorOrHandle": {
+            "mode": "fixed",
+            "value": "[type=email]"
+          },
+          "inputValue": {
+            "mode": "expression",
+            "value": "{{ $run.$input.email }}"
+          },
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-continueOnError",
+                "key": "continueOnError",
+                "valueType": "boolean",
+                "value": {
+                  "mode": "fixed",
+                  "value": "true"
+                }
+              },
+              {
+                "id": "known-timeout",
+                "key": "timeout",
+                "valueType": "number",
+                "value": {
+                  "mode": "fixed",
+                  "value": "5000"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$fillInput-1790035562626-5-paste-1790035702997-paste-1790035752707-paste-1790081802674",
+        "name": "$fillInput",
+        "label": "Fill Input-1",
+        "x": 528,
+        "y": -108,
+        "values": {
+          "inputSelectorOrHandle": {
+            "mode": "fixed",
+            "value": "[type=password]"
+          },
+          "inputValue": {
+            "mode": "expression",
+            "value": "{{ $run.$input.password }}"
+          }
+        }
+      },
+      {
+        "id": "$clickElementAtIndex-1790038300601-7-paste-1790081802674",
+        "name": "$clickElementAtIndex",
+        "label": "Click Element At Index",
+        "x": 720,
+        "y": -108,
+        "values": {
+          "elementIndex": {
+            "mode": "fixed",
+            "value": "-1"
+          },
+          "elementsSelector": {
+            "mode": "fixed",
+            "value": "button"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790076721949-7-paste-1790081802674",
+        "name": "$sleep",
+        "label": "Sleep-1",
+        "x": 912,
+        "y": -108,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "3000"
+          }
+        }
+      },
+      {
+        "id": "If / Else-1790076775701-8-paste-1790081802674",
+        "name": "If / Else",
+        "label": "If / Else",
+        "x": 1104,
+        "y": -108,
+        "values": {
+          "condition": {
+            "mode": "if-condition",
+            "combinator": "and",
+            "rules": [
+              {
+                "id": "condition-1",
+                "category": "string",
+                "operator": "contains",
+                "left": {
+                  "mode": "expression",
+                  "value": "{{ $page.url() }}"
+                },
+                "right": {
+                  "mode": "fixed",
+                  "value": "challengesV2"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1790076847032-9-paste-1790081802674",
+        "name": "$clickElement",
+        "label": "Click Element",
+        "x": 1296,
+        "y": -120,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#try-another-way"
+          }
+        }
+      },
+      {
+        "id": "$fillInput-1790076864712-10-paste-1790081802674",
+        "name": "$fillInput",
+        "label": "Fill Input-2",
+        "x": 1488,
+        "y": -120,
+        "values": {
+          "inputSelectorOrHandle": {
+            "mode": "fixed",
+            "value": ".input_verification_pin"
+          },
+          "inputValue": {
+            "mode": "expression",
+            "value": "{{ $totp($run.$input.totp) }}"
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1790077194137-12-paste-1790081802674",
+        "name": "$clickElement",
+        "label": "Click Element-1",
+        "x": 1680,
+        "y": -120,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#two-step-submit-button"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "$loginRemember-1788004526420-5-paste-1790035752707-paste-1790081802674:flow-options-loginRecipe->$fillInput-1790035562626-5-paste-1790035752707-paste-1790081802674:input",
+        "sourceNodeId": "$loginRemember-1788004526420-5-paste-1790035752707-paste-1790081802674",
+        "targetNodeId": "$fillInput-1790035562626-5-paste-1790035752707-paste-1790081802674",
+        "sourcePort": "flow-options-loginRecipe",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$fillInput-1790035562626-5-paste-1790035752707-paste-1790081802674:output->$fillInput-1790035562626-5-paste-1790035702997-paste-1790035752707-paste-1790081802674:input",
+        "sourceNodeId": "$fillInput-1790035562626-5-paste-1790035752707-paste-1790081802674",
+        "targetNodeId": "$fillInput-1790035562626-5-paste-1790035702997-paste-1790035752707-paste-1790081802674",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$fillInput-1790035562626-5-paste-1790035702997-paste-1790035752707-paste-1790081802674:output->$clickElementAtIndex-1790038300601-7-paste-1790081802674:input",
+        "sourceNodeId": "$fillInput-1790035562626-5-paste-1790035702997-paste-1790035752707-paste-1790081802674",
+        "targetNodeId": "$clickElementAtIndex-1790038300601-7-paste-1790081802674",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElementAtIndex-1790038300601-7-paste-1790081802674:output->$sleep-1790076721949-7-paste-1790081802674:input",
+        "sourceNodeId": "$clickElementAtIndex-1790038300601-7-paste-1790081802674",
+        "targetNodeId": "$sleep-1790076721949-7-paste-1790081802674",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sleep-1790076721949-7-paste-1790081802674:output->If / Else-1790076775701-8-paste-1790081802674:input",
+        "sourceNodeId": "$sleep-1790076721949-7-paste-1790081802674",
+        "targetNodeId": "If / Else-1790076775701-8-paste-1790081802674",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "If / Else-1790076775701-8-paste-1790081802674:true->$clickElement-1790076847032-9-paste-1790081802674:input",
+        "sourceNodeId": "If / Else-1790076775701-8-paste-1790081802674",
+        "targetNodeId": "$clickElement-1790076847032-9-paste-1790081802674",
+        "sourcePort": "true",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElement-1790076847032-9-paste-1790081802674:output->$fillInput-1790076864712-10-paste-1790081802674:input",
+        "sourceNodeId": "$clickElement-1790076847032-9-paste-1790081802674",
+        "targetNodeId": "$fillInput-1790076864712-10-paste-1790081802674",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$fillInput-1790076864712-10-paste-1790081802674:output->$clickElement-1790077194137-12-paste-1790081802674:input",
+        "sourceNodeId": "$fillInput-1790076864712-10-paste-1790081802674",
+        "targetNodeId": "$clickElement-1790077194137-12-paste-1790081802674",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "__system_function:output->$loginRemember-1788004526420-5-paste-1790035752707-paste-1790081802674:input",
+        "sourceNodeId": "__system_function",
+        "targetNodeId": "$loginRemember-1788004526420-5-paste-1790035752707-paste-1790081802674",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      }
+    ]
+  }
+}
