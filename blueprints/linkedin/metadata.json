@@ -6,6 +6,7 @@
   "color": "blue",
   "icon": "icon.png",
   "author": {
-    "name": "Puppetflow Team"
+    "name": "Puppetflow Team",
+    "homepage": "https://puppetflow.com"
   }
 }
