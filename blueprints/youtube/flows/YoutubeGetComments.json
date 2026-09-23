@@ -1,0 +1,482 @@
+{
+  "metadata": {
+    "title": "Youtube Get Comments",
+    "inputs": [
+      {
+        "name": "youtubeUrl",
+        "type": "string",
+        "default": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      },
+      {
+        "name": "pages",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "commentTable",
+        "type": "datatable",
+        "default": "${dataTables}"
+      }
+    ]
+  },
+  "resources": {
+    "data_tables": [
+      {
+        "source_id": "",
+        "name": "Youtube Comments",
+        "description": null,
+        "group": null,
+        "columns": [
+          {
+            "name": "key",
+            "type": "string"
+          },
+          {
+            "name": "comment",
+            "type": "string"
+          },
+          {
+            "name": "author",
+            "type": "string"
+          }
+        ]
+      }
+    ]
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "__system_run",
+        "name": "RUN",
+        "x": 0,
+        "y": -264,
+        "values": {},
+        "system": "run"
+      },
+      {
+        "id": "__system_terminate",
+        "name": "TERMINATE",
+        "x": 0,
+        "y": 456,
+        "values": {},
+        "system": "terminate"
+      },
+      {
+        "id": "$gotoUrl-1788298931012-2-paste-1788306190690",
+        "name": "$gotoUrl",
+        "label": "Goto Url",
+        "x": 192,
+        "y": -264,
+        "values": {
+          "tabName": {
+            "mode": "fixed",
+            "value": "Default"
+          },
+          "url": {
+            "mode": "expression",
+            "value": "{{ $run.$input.youtubeUrl }}"
+          },
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": []
+          }
+        }
+      },
+      {
+        "id": "$clickElementAtIndex-1788299144025-4-paste-1788306190690",
+        "name": "$clickElementAtIndex",
+        "label": "Click Element At Index",
+        "x": 384,
+        "y": -264,
+        "values": {
+          "elementsSelector": {
+            "mode": "fixed",
+            "value": "tp-yt-paper-dialog .eom-buttons .ytSpecTouchFeedbackShapeFill"
+          },
+          "elementIndex": {
+            "mode": "expression",
+            "value": "1"
+          },
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-continueOnError",
+                "key": "continueOnError",
+                "valueType": "boolean",
+                "value": {
+                  "mode": "fixed",
+                  "value": "true"
+                }
+              },
+              {
+                "id": "known-timeout",
+                "key": "timeout",
+                "valueType": "number",
+                "value": {
+                  "mode": "fixed",
+                  "value": "4000"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$gotoUrl-1788298931012-2-paste-1788300987039-paste-1788306190690",
+        "name": "$gotoUrl",
+        "label": "Goto Url-1",
+        "x": 768,
+        "y": -372,
+        "values": {
+          "tabName": {
+            "mode": "fixed",
+            "value": "Default"
+          },
+          "url": {
+            "mode": "expression",
+            "value": "{{ $run.$input.youtubeUrl }}"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1788299283842-6-1788301044584-duplicate-paste-1788306190690",
+        "name": "$sleep",
+        "label": "Sleep-2",
+        "x": 1728,
+        "y": -384,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "3000"
+          }
+        }
+      },
+      {
+        "id": "__sticky_note-1788306081693-10-paste-1788306190690",
+        "name": "__sticky_note",
+        "kind": "stickyNote",
+        "label": "Sticky note",
+        "x": 288,
+        "y": -288,
+        "values": {},
+        "stickyNote": {
+          "content": "# Cookie Consent",
+          "color": "indigo",
+          "width": 319.5037461503601,
+          "height": 246.79598414457092
+        }
+      },
+      {
+        "id": "$sniffNetwork-1788333671181-10",
+        "name": "$sniffNetwork",
+        "label": "Sniff Network",
+        "x": 576,
+        "y": -264,
+        "values": {
+          "profileName": {
+            "mode": "fixed",
+            "value": "Default"
+          },
+          "filters": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-path",
+                "key": "path",
+                "valueType": "string",
+                "value": {
+                  "mode": "fixed",
+                  "value": "*/next*"
+                }
+              }
+            ]
+          },
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": []
+          }
+        }
+      },
+      {
+        "id": "Loop-1788336297517-12",
+        "name": "Loop",
+        "label": "Loop",
+        "x": 1344,
+        "y": -372,
+        "values": {
+          "mode": {
+            "mode": "fixed",
+            "value": "iterations"
+          },
+          "items": {
+            "mode": "expression",
+            "value": "{{ $input.items || [] }}"
+          },
+          "iterations": {
+            "mode": "expression",
+            "value": "{{ $run.$input.pages }}"
+          },
+          "condition": {
+            "mode": "expression",
+            "value": "{{ false }}"
+          },
+          "maxIterations": {
+            "mode": "fixed",
+            "value": "100"
+          }
+        }
+      },
+      {
+        "id": "$scrollByPixels-1788336310418-12",
+        "name": "$scrollByPixels",
+        "label": "Scroll By Pixels",
+        "x": 1536,
+        "y": -384,
+        "values": {
+          "scrollPixels": {
+            "mode": "fixed",
+            "value": "10000"
+          }
+        }
+      },
+      {
+        "id": "$scrollToElement-1788336376775-14",
+        "name": "$scrollToElement",
+        "label": "Scroll To Element",
+        "x": 960,
+        "y": -372,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#comments"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1788336383092-15",
+        "name": "$sleep",
+        "label": "Sleep-1",
+        "x": 1152,
+        "y": -372,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "3000"
+          }
+        }
+      },
+      {
+        "id": "Loop-1788358172519-16",
+        "name": "Loop",
+        "label": "Loop-1",
+        "x": 768,
+        "y": -156,
+        "values": {
+          "mode": {
+            "mode": "fixed",
+            "value": "items"
+          },
+          "items": {
+            "mode": "expression",
+            "value": "{{ $run.$capture.response.body.contentJson.frameworkUpdates?.entityBatchUpdate?.mutations\n    .filter(mutation => mutation.payload?.commentEntityPayload)\n    .map(mutation => mutation.payload.commentEntityPayload)\n    \n}}"
+          },
+          "iterations": {
+            "mode": "fixed",
+            "value": "3"
+          },
+          "condition": {
+            "mode": "expression",
+            "value": "{{ false }}"
+          },
+          "maxIterations": {
+            "mode": "fixed",
+            "value": "100"
+          }
+        }
+      },
+      {
+        "id": "$dataTableUpsertRows-1789923573726-14",
+        "name": "$dataTableUpsertRows",
+        "label": "Upsert Row(s)",
+        "x": 960,
+        "y": -156,
+        "values": {
+          "tableId": {
+            "mode": "expression",
+            "value": "{{ $run.$input.commentTable }}"
+          },
+          "filters": {
+            "mode": "fixed",
+            "value": "[{\"keyName\":\"key\",\"condition\":\"eq\",\"keyValue\":\"{{ $run.$loop.item.properties.commentId }}\",\"keyValueMode\":\"expression\"}]"
+          },
+          "values": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-author",
+                "key": "author",
+                "valueType": "string",
+                "value": {
+                  "mode": "expression",
+                  "value": "{{ $run.$loop.item.properties.authorButtonA11y }}"
+                }
+              },
+              {
+                "id": "known-comment",
+                "key": "comment",
+                "valueType": "string",
+                "value": {
+                  "mode": "expression",
+                  "value": "{{ $run.$loop.item.properties.content.content }}"
+                }
+              },
+              {
+                "id": "known-key",
+                "key": "key",
+                "valueType": "string",
+                "value": {
+                  "mode": "expression",
+                  "value": "{{ $run.$loop.item.properties.commentId }}"
+                }
+              }
+            ]
+          },
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": []
+          }
+        }
+      },
+      {
+        "id": "$log-1789923690183-14",
+        "name": "$log",
+        "label": "Log",
+        "x": 1152,
+        "y": -156,
+        "values": {
+          "messages": {
+            "mode": "expression",
+            "value": "{{ $run.$loop.item.properties.content.content }}"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "$gotoUrl-1788298931012-2-paste-1788306190690:output->$clickElementAtIndex-1788299144025-4-paste-1788306190690:input",
+        "sourceNodeId": "$gotoUrl-1788298931012-2-paste-1788306190690",
+        "targetNodeId": "$clickElementAtIndex-1788299144025-4-paste-1788306190690",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sniffNetwork-1788333671181-10:output->$gotoUrl-1788298931012-2-paste-1788300987039-paste-1788306190690:input",
+        "sourceNodeId": "$sniffNetwork-1788333671181-10",
+        "targetNodeId": "$gotoUrl-1788298931012-2-paste-1788300987039-paste-1788306190690",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "Loop-1788336297517-12:loop->$scrollByPixels-1788336310418-12:input",
+        "sourceNodeId": "Loop-1788336297517-12",
+        "targetNodeId": "$scrollByPixels-1788336310418-12",
+        "sourcePort": "loop",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$scrollByPixels-1788336310418-12:output->$sleep-1788299283842-6-1788301044584-duplicate-paste-1788306190690:input",
+        "sourceNodeId": "$scrollByPixels-1788336310418-12",
+        "targetNodeId": "$sleep-1788299283842-6-1788301044584-duplicate-paste-1788306190690",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$gotoUrl-1788298931012-2-paste-1788300987039-paste-1788306190690:output->$scrollToElement-1788336376775-14:input",
+        "sourceNodeId": "$gotoUrl-1788298931012-2-paste-1788300987039-paste-1788306190690",
+        "targetNodeId": "$scrollToElement-1788336376775-14",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sleep-1788336383092-15:output->Loop-1788336297517-12:input",
+        "sourceNodeId": "$sleep-1788336383092-15",
+        "targetNodeId": "Loop-1788336297517-12",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$scrollToElement-1788336376775-14:output->$sleep-1788336383092-15:input",
+        "sourceNodeId": "$scrollToElement-1788336376775-14",
+        "targetNodeId": "$sleep-1788336383092-15",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sniffNetwork-1788333671181-10:flow-options-sniffing->Loop-1788358172519-16:input",
+        "sourceNodeId": "$sniffNetwork-1788333671181-10",
+        "targetNodeId": "Loop-1788358172519-16",
+        "sourcePort": "flow-options-sniffing",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "__system_run:output->$gotoUrl-1788298931012-2-paste-1788306190690:input",
+        "sourceNodeId": "__system_run",
+        "targetNodeId": "$gotoUrl-1788298931012-2-paste-1788306190690",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElementAtIndex-1788299144025-4-paste-1788306190690:output->$sniffNetwork-1788333671181-10:input",
+        "sourceNodeId": "$clickElementAtIndex-1788299144025-4-paste-1788306190690",
+        "targetNodeId": "$sniffNetwork-1788333671181-10",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "Loop-1788358172519-16:loop->$dataTableUpsertRows-1789923573726-14:input",
+        "sourceNodeId": "Loop-1788358172519-16",
+        "targetNodeId": "$dataTableUpsertRows-1789923573726-14",
+        "sourcePort": "loop",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$dataTableUpsertRows-1789923573726-14:output->$log-1789923690183-14:input",
+        "sourceNodeId": "$dataTableUpsertRows-1789923573726-14",
+        "targetNodeId": "$log-1789923690183-14",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      }
+    ]
+  }
+}

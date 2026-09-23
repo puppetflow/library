@@ -1,0 +1,11 @@
+{
+  "title": "Youtube",
+  "namespace": "youtube",
+  "description": "Youtube is a video sharing platform. This blueprint allows you to search for videos on Youtube.",
+  "category": "social",
+  "color": "red",
+  "icon": "icon.png",
+  "author": {
+    "name": "Puppetflow Team"
+  }
+}
