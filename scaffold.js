@@ -21,7 +21,7 @@ const NAMESPACE_RE = /^[a-z_][a-z0-9_]*$/;
 const HEX_COLOR_RE = /^#[0-9a-f]{6}$/i;
 const JS_IDENT   = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/;
 const CATEGORIES = ['auth', 'scraping', 'files', 'notifications', 'data', 'fun', 'form', 'social'];
-const COLORS     = ['green', 'blue', 'cyan', 'purple', 'pink', 'orange', 'amber', 'slate', 'white'];
+const COLORS     = ['green', 'blue', 'cyan', 'purple', 'pink', 'red', 'orange', 'amber', 'slate', 'white'];
 
 const s = {
   string: (opts = {}) => ({ _type: 'string', _optional: !!opts.optional }),
