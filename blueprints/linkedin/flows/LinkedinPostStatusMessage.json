@@ -1,0 +1,216 @@
+{
+    "metadata": {
+      "title": "Linkedin Post Status Message",
+      "description": "Post a status message to Linkedin",
+      "inputs": [
+        {
+          "name": "email",
+          "type": "string",
+          "default": "jessym.reziga@gmail.com"
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "default": "${vars.var_OcdQc9zRpDCZ}"
+        },
+        {
+          "name": "totp",
+          "type": "string",
+          "default": "${vars.var_DppZL9FLWKmi}"
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "default": "Hello World"
+        }
+      ]
+    },
+    "graph": {
+      "nodes": [
+        {
+          "id": "__system_run",
+          "name": "RUN",
+          "x": 0,
+          "y": -120,
+          "values": {},
+          "system": "run"
+        },
+        {
+          "id": "__system_terminate",
+          "name": "TERMINATE",
+          "x": 0,
+          "y": 168,
+          "values": {},
+          "system": "terminate"
+        },
+        {
+          "id": "$$snip_DytBqbZXeJ4S-1790081862820-2",
+          "name": "$$snip_DytBqbZXeJ4S",
+          "label": "Linkedin Login",
+          "x": 192,
+          "y": -120,
+          "values": {
+            "email": {
+              "mode": "expression",
+              "value": "{{ $run.$input.email }}"
+            },
+            "password": {
+              "mode": "expression",
+              "value": "{{ $run.$input.password }}"
+            },
+            "totp": {
+              "mode": "expression",
+              "value": "{{ $run.$input.totp }}"
+            }
+          },
+          "callArguments": [
+            "email",
+            "password",
+            "totp"
+          ]
+        },
+        {
+          "id": "$gotoUrl-1790120152938-3",
+          "name": "$gotoUrl",
+          "label": "Goto Url",
+          "x": 384,
+          "y": -120,
+          "values": {
+            "tabName": {
+              "mode": "fixed",
+              "value": "Default"
+            },
+            "url": {
+              "mode": "fixed",
+              "value": "https://www.linkedin.com/sharing/compose"
+            },
+            "options": {
+              "mode": "object",
+              "inputMode": "form",
+              "jsonMode": "fixed",
+              "value": "{}",
+              "fields": [
+                {
+                  "id": "known-timeout",
+                  "key": "timeout",
+                  "valueType": "number",
+                  "value": {
+                    "mode": "fixed",
+                    "value": "8000"
+                  }
+                },
+                {
+                  "id": "known-waitUntil",
+                  "key": "waitUntil",
+                  "valueType": "string",
+                  "value": {
+                    "mode": "fixed",
+                    "value": "networkidle2"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "$sleep-1790120159289-4",
+          "name": "$sleep",
+          "label": "Sleep",
+          "x": 576,
+          "y": -120,
+          "values": {
+            "milliseconds": {
+              "mode": "fixed",
+              "value": "4000"
+            }
+          }
+        },
+        {
+          "id": "$keyboardPress-1790120164118-5",
+          "name": "$keyboardPress",
+          "label": "Keyboard Press",
+          "x": 768,
+          "y": -120,
+          "values": {
+            "text": {
+              "mode": "expression",
+              "value": "{{ $run.$input.message }}"
+            }
+          }
+        },
+        {
+          "id": "$clickElement-1790122436580-7",
+          "name": "$clickElement",
+          "label": "Click Element-1",
+          "x": 984,
+          "y": -120,
+          "values": {
+            "selectorOrHandle": {
+              "mode": "fixed",
+              "value": "#clock-medium"
+            },
+            "options": {
+              "mode": "object",
+              "inputMode": "form",
+              "jsonMode": "fixed",
+              "value": "{}",
+              "fields": [
+                {
+                  "id": "known-offsetX",
+                  "key": "offsetX",
+                  "valueType": "number",
+                  "value": {
+                    "mode": "fixed",
+                    "value": "50"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "__system_run:output->$$snip_DytBqbZXeJ4S-1790081862820-2:input",
+          "sourceNodeId": "__system_run",
+          "targetNodeId": "$$snip_DytBqbZXeJ4S-1790081862820-2",
+          "sourcePort": "output",
+          "targetPort": "input",
+          "connectionType": "flow"
+        },
+        {
+          "id": "$$snip_DytBqbZXeJ4S-1790081862820-2:output->$gotoUrl-1790120152938-3:input",
+          "sourceNodeId": "$$snip_DytBqbZXeJ4S-1790081862820-2",
+          "targetNodeId": "$gotoUrl-1790120152938-3",
+          "sourcePort": "output",
+          "targetPort": "input",
+          "connectionType": "flow"
+        },
+        {
+          "id": "$gotoUrl-1790120152938-3:output->$sleep-1790120159289-4:input",
+          "sourceNodeId": "$gotoUrl-1790120152938-3",
+          "targetNodeId": "$sleep-1790120159289-4",
+          "sourcePort": "output",
+          "targetPort": "input",
+          "connectionType": "flow"
+        },
+        {
+          "id": "$sleep-1790120159289-4:output->$keyboardPress-1790120164118-5:input",
+          "sourceNodeId": "$sleep-1790120159289-4",
+          "targetNodeId": "$keyboardPress-1790120164118-5",
+          "sourcePort": "output",
+          "targetPort": "input",
+          "connectionType": "flow"
+        },
+        {
+          "id": "$keyboardPress-1790120164118-5:output->$clickElement-1790122436580-7:input",
+          "sourceNodeId": "$keyboardPress-1790120164118-5",
+          "targetNodeId": "$clickElement-1790122436580-7",
+          "sourcePort": "output",
+          "targetPort": "input",
+          "connectionType": "flow"
+        }
+      ]
+    }
+  }
+  
