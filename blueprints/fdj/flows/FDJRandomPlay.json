@@ -265,8 +265,8 @@
         }
       },
       {
-        "id": "$$snip_bZ2bA1Liwsxl-1790018015461-18",
-        "name": "$$snip_bZ2bA1Liwsxl",
+        "id": "$$fdj_FDJLogin-1790018015461-18",
+        "name": "$$fdj_FDJLogin",
         "label": "FDJ Login",
         "x": 192,
         "y": -96,
@@ -448,17 +448,17 @@
         "connectionType": "flow"
       },
       {
-        "id": "$$snip_bZ2bA1Liwsxl-1790018015461-18:output->Code-1790020469415-18-paste-1790021029698:input",
-        "sourceNodeId": "$$snip_bZ2bA1Liwsxl-1790018015461-18",
+        "id": "$$fdj_FDJLogin-1790018015461-18:output->Code-1790020469415-18-paste-1790021029698:input",
+        "sourceNodeId": "$$fdj_FDJLogin-1790018015461-18",
         "targetNodeId": "Code-1790020469415-18-paste-1790021029698",
         "sourcePort": "output",
         "targetPort": "input",
         "connectionType": "flow"
       },
       {
-        "id": "__system_run:output->$$snip_bZ2bA1Liwsxl-1790018015461-18:input",
+        "id": "__system_run:output->$$fdj_FDJLogin-1790018015461-18:input",
         "sourceNodeId": "__system_run",
-        "targetNodeId": "$$snip_bZ2bA1Liwsxl-1790018015461-18",
+        "targetNodeId": "$$fdj_FDJLogin-1790018015461-18",
         "sourcePort": "output",
         "targetPort": "input",
         "connectionType": "flow"

@@ -44,8 +44,8 @@
           "system": "terminate"
         },
         {
-          "id": "$$snip_DytBqbZXeJ4S-1790081862820-2",
-          "name": "$$snip_DytBqbZXeJ4S",
+          "id": "$$linkedin_LinkedinLogin-1790081862820-2",
+          "name": "$$linkedin_LinkedinLogin",
           "label": "Linkedin Login",
           "x": 192,
           "y": -120,
@@ -171,16 +171,16 @@
       ],
       "edges": [
         {
-          "id": "__system_run:output->$$snip_DytBqbZXeJ4S-1790081862820-2:input",
+          "id": "__system_run:output->$$linkedin_LinkedinLogin-1790081862820-2:input",
           "sourceNodeId": "__system_run",
-          "targetNodeId": "$$snip_DytBqbZXeJ4S-1790081862820-2",
+          "targetNodeId": "$$linkedin_LinkedinLogin-1790081862820-2",
           "sourcePort": "output",
           "targetPort": "input",
           "connectionType": "flow"
         },
         {
-          "id": "$$snip_DytBqbZXeJ4S-1790081862820-2:output->$gotoUrl-1790120152938-3:input",
-          "sourceNodeId": "$$snip_DytBqbZXeJ4S-1790081862820-2",
+          "id": "$$linkedin_LinkedinLogin-1790081862820-2:output->$gotoUrl-1790120152938-3:input",
+          "sourceNodeId": "$$linkedin_LinkedinLogin-1790081862820-2",
           "targetNodeId": "$gotoUrl-1790120152938-3",
           "sourcePort": "output",
           "targetPort": "input",
