@@ -6,17 +6,17 @@
         {
           "name": "email",
           "type": "string",
-          "default": "jessym.reziga@gmail.com"
+          "default": ""
         },
         {
           "name": "password",
           "type": "string",
-          "default": "${vars.var_OcdQc9zRpDCZ}"
+          "default": "${vars}"
         },
         {
           "name": "totp",
           "type": "string",
-          "default": "${vars.var_DppZL9FLWKmi}"
+          "default": "${vars}"
         },
         {
           "name": "message",
