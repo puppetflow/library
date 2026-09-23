@@ -2,7 +2,7 @@
   "title": "LinkedIn",
   "namespace": "linkedin",
   "description": "LinkedIn is a social media platform for professionals. This blueprint allows you to login to LinkedIn and fill out a post form.",
-  "category": "form",
+  "category": "social",
   "color": "blue",
   "icon": "icon.png"
 }
