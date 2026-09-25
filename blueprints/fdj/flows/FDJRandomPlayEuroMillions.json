@@ -1,0 +1,564 @@
+{
+  "metadata": {
+    "title": "FDJ Random Play EuroMillions",
+    "inputs": [
+      {
+        "name": "username",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "name": "birthdate",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "__system_run",
+        "name": "RUN",
+        "x": 0,
+        "y": -108,
+        "values": {},
+        "system": "run"
+      },
+      {
+        "id": "__system_terminate",
+        "name": "TERMINATE",
+        "x": 0,
+        "y": 168,
+        "values": {},
+        "system": "terminate"
+      },
+      {
+        "id": "Loop-1790015565376-4-paste-1790022145896",
+        "name": "Loop",
+        "label": "Loop",
+        "x": 1008,
+        "y": -108,
+        "values": {
+          "mode": {
+            "mode": "fixed",
+            "value": "items"
+          },
+          "items": {
+            "mode": "expression",
+            "value": "{{ $run.result.numbers }}"
+          },
+          "iterations": {
+            "mode": "fixed",
+            "value": "3"
+          },
+          "condition": {
+            "mode": "expression",
+            "value": "{{ false }}"
+          },
+          "maxIterations": {
+            "mode": "fixed",
+            "value": "100"
+          }
+        }
+      },
+      {
+        "id": "$clickElementAtIndex-1790016545479-6-paste-1790022145896",
+        "name": "$clickElementAtIndex",
+        "label": "Click Element At Index",
+        "x": 1200,
+        "y": -216,
+        "values": {
+          "elementsSelector": {
+            "mode": "expression",
+            "value": "#pdj-primary-selections .peer"
+          },
+          "elementIndex": {
+            "mode": "expression",
+            "value": "{{ $run.$loop.item - 1 }}"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790016576029-7-paste-1790022145896",
+        "name": "$sleep",
+        "label": "Sleep",
+        "x": 1392,
+        "y": -288,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "1000"
+          }
+        }
+      },
+      {
+        "id": "Set-1790016602460-9-paste-1790022145896",
+        "name": "Set",
+        "label": "Set variable",
+        "x": 624,
+        "y": -108,
+        "values": {
+          "variables": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "custom-1790016603462",
+                "key": "result",
+                "keyMode": "fixed",
+                "valueType": "object",
+                "value": {
+                  "mode": "object",
+                  "inputMode": "json",
+                  "jsonMode": "expression",
+                  "value": "{{ JSON.parse($run.text) }}",
+                  "fields": []
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790017805913-9-paste-1790022145896",
+        "name": "$sleep",
+        "label": "Sleep-1",
+        "x": 1392,
+        "y": 144,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "1000"
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1790017842367-10-paste-1790022145896",
+        "name": "$clickElement",
+        "label": "Click Element",
+        "x": 1584,
+        "y": 144,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#pdj-play-button"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790017918273-11-paste-1790022145896",
+        "name": "$sleep",
+        "label": "Sleep-2",
+        "x": 1776,
+        "y": 144,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "3000"
+          }
+        }
+      },
+      {
+        "id": "$selectElement-1790017929426-12-paste-1790022145896",
+        "name": "$selectElement",
+        "label": "Select Element",
+        "x": 1968,
+        "y": 144,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "[role=dialog]"
+          },
+          "options": {
+            "mode": "object",
+            "inputMode": "form",
+            "jsonMode": "fixed",
+            "value": "{}",
+            "fields": [
+              {
+                "id": "known-timeout",
+                "key": "timeout",
+                "valueType": "number",
+                "value": {
+                  "mode": "fixed",
+                  "value": "2000"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "If / Else-1790017939918-13-paste-1790022145896",
+        "name": "If / Else",
+        "label": "If / Else",
+        "x": 2160,
+        "y": 144,
+        "values": {
+          "condition": {
+            "mode": "if-condition",
+            "combinator": "and",
+            "rules": [
+              {
+                "id": "condition-1",
+                "category": "object",
+                "operator": "exists",
+                "left": {
+                  "mode": "expression",
+                  "value": "{{ $run.$result }}"
+                },
+                "right": {
+                  "mode": "fixed",
+                  "value": ""
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1790017965531-14-paste-1790022145896",
+        "name": "$clickElement",
+        "label": "Click Element-1",
+        "x": 2352,
+        "y": 36,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "[role=dialog] button.absolute"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790017992865-15-paste-1790022145896",
+        "name": "$sleep",
+        "label": "Sleep-3",
+        "x": 2544,
+        "y": 36,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "1000"
+          }
+        }
+      },
+      {
+        "id": "$clickElement-1790017997113-16-paste-1790022145896",
+        "name": "$clickElement",
+        "deactivated": false,
+        "label": "Click Element-2",
+        "x": 2736,
+        "y": 156,
+        "values": {
+          "selectorOrHandle": {
+            "mode": "fixed",
+            "value": "#validate-button"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790018003460-17-paste-1790022145896",
+        "name": "$sleep",
+        "deactivated": false,
+        "label": "Sleep-4",
+        "x": 2928,
+        "y": 156,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "10000"
+          }
+        }
+      },
+      {
+        "id": "$gotoUrl-1790018142970-19-paste-1790022145896",
+        "name": "$gotoUrl",
+        "label": "Goto Url",
+        "x": 816,
+        "y": -108,
+        "values": {
+          "tabName": {
+            "mode": "fixed",
+            "value": "Default"
+          },
+          "url": {
+            "mode": "fixed",
+            "value": "https://www.fdj.fr/jeux-de-tirage/euromillions-my-million?board=0"
+          }
+        }
+      },
+      {
+        "id": "$$snip_R5x089fklfMd-1790034675019-33",
+        "name": "$$snip_R5x089fklfMd",
+        "label": "FDJ Login",
+        "x": 192,
+        "y": -108,
+        "values": {
+          "username": {
+            "mode": "expression",
+            "value": "{{ $run.$input.username }}"
+          },
+          "password": {
+            "mode": "expression",
+            "value": "{{ $run.$input.password }}"
+          },
+          "birthdate": {
+            "mode": "expression",
+            "value": "{{ $run.$input.birthdate }}"
+          },
+          "channelId": {
+            "mode": "expression",
+            "value": "{{ $run.$input.channelId }}"
+          }
+        },
+        "callArguments": [
+          "username",
+          "password",
+          "birthdate",
+          "channelId"
+        ]
+      },
+      {
+        "id": "Loop-1790015565376-4-paste-1790022145896-paste-1790379077567",
+        "name": "Loop",
+        "label": "Loop-1",
+        "x": 1200,
+        "y": 0,
+        "values": {
+          "mode": {
+            "mode": "fixed",
+            "value": "items"
+          },
+          "items": {
+            "mode": "expression",
+            "value": "{{ $run.result.stars }}"
+          },
+          "iterations": {
+            "mode": "fixed",
+            "value": "3"
+          },
+          "condition": {
+            "mode": "expression",
+            "value": "{{ false }}"
+          },
+          "maxIterations": {
+            "mode": "fixed",
+            "value": "100"
+          }
+        }
+      },
+      {
+        "id": "$clickElementAtIndex-1790016545479-6-paste-1790022145896-paste-1790379077567",
+        "name": "$clickElementAtIndex",
+        "label": "Click Element At Index-2",
+        "x": 1392,
+        "y": -72,
+        "values": {
+          "elementsSelector": {
+            "mode": "expression",
+            "value": "#pdj-secondary-selections .peer"
+          },
+          "elementIndex": {
+            "mode": "expression",
+            "value": "{{ $run.$loop.item - 1 }}"
+          }
+        }
+      },
+      {
+        "id": "$sleep-1790016576029-7-paste-1790022145896-paste-1790379077567",
+        "name": "$sleep",
+        "label": "Sleep-5",
+        "x": 1584,
+        "y": -72,
+        "values": {
+          "milliseconds": {
+            "mode": "fixed",
+            "value": "1000"
+          }
+        }
+      },
+      {
+        "id": "Code-1790379695949-20",
+        "name": "Code",
+        "label": "Code",
+        "x": 408,
+        "y": -108,
+        "values": {
+          "code": {
+            "mode": "fixed",
+            "value": "const numbers = [];\n\nwhile (numbers.length < 5) {\n  const number = Math.floor(Math.random() * 49) + 1;\n\n  if (!numbers.includes(number)) {\n    numbers.push(number);\n  }\n}\n\nnumbers.sort((a, b) => a - b);\n\nconst stars = [];\n\nwhile (stars.length < 2) {\n  const star = Math.floor(Math.random() * 49) + 1;\n\n  if (!stars.includes(star)) {\n    stars.push(star);\n  }\n}\n\nstars.sort((a, b) => a - b);\n\nconst result = {\n  numbers,\n  stars\n};\n\n$run.result = result;"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "Loop-1790015565376-4-paste-1790022145896:loop->$clickElementAtIndex-1790016545479-6-paste-1790022145896:input",
+        "sourceNodeId": "Loop-1790015565376-4-paste-1790022145896",
+        "targetNodeId": "$clickElementAtIndex-1790016545479-6-paste-1790022145896",
+        "sourcePort": "loop",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElementAtIndex-1790016545479-6-paste-1790022145896:output->$sleep-1790016576029-7-paste-1790022145896:input",
+        "sourceNodeId": "$clickElementAtIndex-1790016545479-6-paste-1790022145896",
+        "targetNodeId": "$sleep-1790016576029-7-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sleep-1790017805913-9-paste-1790022145896:output->$clickElement-1790017842367-10-paste-1790022145896:input",
+        "sourceNodeId": "$sleep-1790017805913-9-paste-1790022145896",
+        "targetNodeId": "$clickElement-1790017842367-10-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElement-1790017842367-10-paste-1790022145896:output->$sleep-1790017918273-11-paste-1790022145896:input",
+        "sourceNodeId": "$clickElement-1790017842367-10-paste-1790022145896",
+        "targetNodeId": "$sleep-1790017918273-11-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sleep-1790017918273-11-paste-1790022145896:output->$selectElement-1790017929426-12-paste-1790022145896:input",
+        "sourceNodeId": "$sleep-1790017918273-11-paste-1790022145896",
+        "targetNodeId": "$selectElement-1790017929426-12-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$selectElement-1790017929426-12-paste-1790022145896:output->If / Else-1790017939918-13-paste-1790022145896:input",
+        "sourceNodeId": "$selectElement-1790017929426-12-paste-1790022145896",
+        "targetNodeId": "If / Else-1790017939918-13-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "If / Else-1790017939918-13-paste-1790022145896:true->$clickElement-1790017965531-14-paste-1790022145896:input",
+        "sourceNodeId": "If / Else-1790017939918-13-paste-1790022145896",
+        "targetNodeId": "$clickElement-1790017965531-14-paste-1790022145896",
+        "sourcePort": "true",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElement-1790017965531-14-paste-1790022145896:output->$sleep-1790017992865-15-paste-1790022145896:input",
+        "sourceNodeId": "$clickElement-1790017965531-14-paste-1790022145896",
+        "targetNodeId": "$sleep-1790017992865-15-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$sleep-1790017992865-15-paste-1790022145896:output->$clickElement-1790017997113-16-paste-1790022145896:input",
+        "sourceNodeId": "$sleep-1790017992865-15-paste-1790022145896",
+        "targetNodeId": "$clickElement-1790017997113-16-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "If / Else-1790017939918-13-paste-1790022145896:false->$clickElement-1790017997113-16-paste-1790022145896:input",
+        "sourceNodeId": "If / Else-1790017939918-13-paste-1790022145896",
+        "targetNodeId": "$clickElement-1790017997113-16-paste-1790022145896",
+        "sourcePort": "false",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElement-1790017997113-16-paste-1790022145896:output->$sleep-1790018003460-17-paste-1790022145896:input",
+        "sourceNodeId": "$clickElement-1790017997113-16-paste-1790022145896",
+        "targetNodeId": "$sleep-1790018003460-17-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "Set-1790016602460-9-paste-1790022145896:output->$gotoUrl-1790018142970-19-paste-1790022145896:input",
+        "sourceNodeId": "Set-1790016602460-9-paste-1790022145896",
+        "targetNodeId": "$gotoUrl-1790018142970-19-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$gotoUrl-1790018142970-19-paste-1790022145896:output->Loop-1790015565376-4-paste-1790022145896:input",
+        "sourceNodeId": "$gotoUrl-1790018142970-19-paste-1790022145896",
+        "targetNodeId": "Loop-1790015565376-4-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "__system_run:output->$$snip_R5x089fklfMd-1790034675019-33:input",
+        "sourceNodeId": "__system_run",
+        "targetNodeId": "$$snip_R5x089fklfMd-1790034675019-33",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "Loop-1790015565376-4-paste-1790022145896-paste-1790379077567:loop->$clickElementAtIndex-1790016545479-6-paste-1790022145896-paste-1790379077567:input",
+        "sourceNodeId": "Loop-1790015565376-4-paste-1790022145896-paste-1790379077567",
+        "targetNodeId": "$clickElementAtIndex-1790016545479-6-paste-1790022145896-paste-1790379077567",
+        "sourcePort": "loop",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$clickElementAtIndex-1790016545479-6-paste-1790022145896-paste-1790379077567:output->$sleep-1790016576029-7-paste-1790022145896-paste-1790379077567:input",
+        "sourceNodeId": "$clickElementAtIndex-1790016545479-6-paste-1790022145896-paste-1790379077567",
+        "targetNodeId": "$sleep-1790016576029-7-paste-1790022145896-paste-1790379077567",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "Loop-1790015565376-4-paste-1790022145896:done->Loop-1790015565376-4-paste-1790022145896-paste-1790379077567:input",
+        "sourceNodeId": "Loop-1790015565376-4-paste-1790022145896",
+        "targetNodeId": "Loop-1790015565376-4-paste-1790022145896-paste-1790379077567",
+        "sourcePort": "done",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "Loop-1790015565376-4-paste-1790022145896-paste-1790379077567:done->$sleep-1790017805913-9-paste-1790022145896:input",
+        "sourceNodeId": "Loop-1790015565376-4-paste-1790022145896-paste-1790379077567",
+        "targetNodeId": "$sleep-1790017805913-9-paste-1790022145896",
+        "sourcePort": "done",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "$$snip_R5x089fklfMd-1790034675019-33:output->Code-1790379695949-20:input",
+        "sourceNodeId": "$$snip_R5x089fklfMd-1790034675019-33",
+        "targetNodeId": "Code-1790379695949-20",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      },
+      {
+        "id": "Code-1790379695949-20:output->Set-1790016602460-9-paste-1790022145896:input",
+        "sourceNodeId": "Code-1790379695949-20",
+        "targetNodeId": "Set-1790016602460-9-paste-1790022145896",
+        "sourcePort": "output",
+        "targetPort": "input",
+        "connectionType": "flow"
+      }
+    ]
+  }
+}
