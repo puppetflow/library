@@ -246,8 +246,8 @@
         }
       },
       {
-        "id": "$selectElement-1789687640394-13-paste-1789989279987",
-        "name": "$selectElement",
+        "id": "$selectOneElement-1789687640394-13-paste-1789989279987",
+        "name": "$selectOneElement",
         "label": "Select Element",
         "x": 204,
         "y": 12,
@@ -410,17 +410,17 @@
         "connectionType": "flow"
       },
       {
-        "id": "$selectElement-1789687640394-13-paste-1789989279987:output->If / Else-1789687625898-12-paste-1789989279987:input",
-        "sourceNodeId": "$selectElement-1789687640394-13-paste-1789989279987",
+        "id": "$selectOneElement-1789687640394-13-paste-1789989279987:output->If / Else-1789687625898-12-paste-1789989279987:input",
+        "sourceNodeId": "$selectOneElement-1789687640394-13-paste-1789989279987",
         "targetNodeId": "If / Else-1789687625898-12-paste-1789989279987",
         "sourcePort": "output",
         "targetPort": "input",
         "connectionType": "flow"
       },
       {
-        "id": "$gotoUrl-1789687618812-11-paste-1789989279987:output->$selectElement-1789687640394-13-paste-1789989279987:input",
+        "id": "$gotoUrl-1789687618812-11-paste-1789989279987:output->$selectOneElement-1789687640394-13-paste-1789989279987:input",
         "sourceNodeId": "$gotoUrl-1789687618812-11-paste-1789989279987",
-        "targetNodeId": "$selectElement-1789687640394-13-paste-1789989279987",
+        "targetNodeId": "$selectOneElement-1789687640394-13-paste-1789989279987",
         "sourcePort": "output",
         "targetPort": "input",
         "connectionType": "flow"

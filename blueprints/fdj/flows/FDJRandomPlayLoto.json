@@ -153,8 +153,8 @@
         }
       },
       {
-        "id": "$selectElement-1790017929426-12",
-        "name": "$selectElement",
+        "id": "$selectOneElement-1790017929426-12",
+        "name": "$selectOneElement",
         "label": "Select Element",
         "x": 1728,
         "y": 12,
@@ -376,16 +376,16 @@
         "connectionType": "flow"
       },
       {
-        "id": "$sleep-1790017918273-11:output->$selectElement-1790017929426-12:input",
+        "id": "$sleep-1790017918273-11:output->$selectOneElement-1790017929426-12:input",
         "sourceNodeId": "$sleep-1790017918273-11",
-        "targetNodeId": "$selectElement-1790017929426-12",
+        "targetNodeId": "$selectOneElement-1790017929426-12",
         "sourcePort": "output",
         "targetPort": "input",
         "connectionType": "flow"
       },
       {
-        "id": "$selectElement-1790017929426-12:output->If / Else-1790017939918-13:input",
-        "sourceNodeId": "$selectElement-1790017929426-12",
+        "id": "$selectOneElement-1790017929426-12:output->If / Else-1790017939918-13:input",
+        "sourceNodeId": "$selectOneElement-1790017929426-12",
         "targetNodeId": "If / Else-1790017939918-13",
         "sourcePort": "output",
         "targetPort": "input",
