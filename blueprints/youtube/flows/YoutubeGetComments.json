@@ -15,14 +15,14 @@
       {
         "name": "commentTable",
         "type": "datatable",
-        "default": "${dataTables}"
+        "default": "${dataTables.youtube-comments}"
       }
     ]
   },
   "resources": {
     "data_tables": [
       {
-        "source_id": "",
+        "source_id": "youtube-comments",
         "name": "Youtube Comments",
         "description": null,
         "group": null,
